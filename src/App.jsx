@@ -11,6 +11,7 @@ import SettingsModal from './components/SettingsModal'
 import CalendarModal from './components/CalendarModal'
 import { notificationService } from './utils/notificationService'
 import { soundService } from './utils/soundService'
+import { driveService } from './utils/googleDriveService'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -61,6 +62,12 @@ function App() {
       initNotifications(savedMissions)
     }
     if (savedMissions) setMissions(savedMissions)
+    
+    // Initialize Google Auth for Web support
+    import('./utils/googleAuthService').then(({ googleAuthService }) => {
+      googleAuthService.initialize();
+    });
+
     setLoading(false)
   }, [])
 
@@ -81,6 +88,35 @@ function App() {
     storage.setUser(newData)
     setUser(newData)
     if (newData.theme) applyTheme(newData.theme)
+  }
+
+  const handleSync = async () => {
+    if (!user?.googleUser?.accessToken) return false;
+    
+    const localData = {
+      user: {
+        nickname: user.nickname,
+        avatarId: user.avatarId,
+        theme: user.theme
+      },
+      missions: missions
+    };
+    
+    const result = await driveService.syncData(localData, user.googleUser.accessToken);
+    if (result.success && result.data) {
+      setMissions(result.data.missions);
+      if (result.data.user) {
+        const newUser = { ...user, ...result.data.user };
+        storage.setUser(newUser);
+        setUser(newUser);
+        if (newUser.theme) applyTheme(newUser.theme);
+      }
+      soundService.playTada(); // Play sound on successful sync
+      return true;
+    } else {
+      console.error("Sync failed:", result.error);
+      return false;
+    }
   }
 
   const addMission = (newMission) => {
@@ -329,7 +365,7 @@ function App() {
 
       <AddMissionModal isOpen={isAddModalOpen} onClose={() => { setIsAddModalOpen(false); setEditingMission(null); }} onAdd={addMission} editingMission={editingMission} missions={missions} />
       <TrophyModal isOpen={isTrophiesOpen} onClose={() => setIsTrophiesOpen(false)} missions={missions} t={t} />
-      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} user={user} onUpdateUser={updateUserInfo} />
+      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} user={user} onUpdateUser={updateUserInfo} onSync={handleSync} />
       <CalendarModal isOpen={isCalendarOpen} onClose={() => setIsCalendarOpen(false)} missions={missions} />
     </div>
   )

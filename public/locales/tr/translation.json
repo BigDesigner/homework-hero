@@ -99,6 +99,10 @@
     "theme_pink": "Pembe",
     "language_title": "Dil Seçimi",
     "cloud_title": "Bulut Senkronizasyonu",
+    "cloud_connect": "Google Drive ile Bağlan",
+    "cloud_connected": "Google Hesabı Bağlı",
+    "cloud_disconnect": "Bağlantıyı Kes",
+    "sync_now": "Şimdi Senkronize Et",
     "coming_soon": "Çok Yakında! 🚀",
     "reset_data": "HER ŞEYİ SIFIRLA"
   },

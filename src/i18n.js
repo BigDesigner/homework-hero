@@ -115,6 +115,11 @@ i18n
             "theme_pink": "Pembe",
             "language_title": "Dil Seçimi",
             "cloud_title": "Bulut Senkronizasyonu",
+            "cloud_connect": "Google Drive ile Bağlan",
+            "cloud_connected": "Google Hesabı Bağlı",
+            "cloud_disconnect": "Bağlantıyı Kes",
+            "sync_now": "Şimdi Senkronize Et",
+            "login_error": "Giriş yapılamadı. Tekrar deneyin.",
             "coming_soon": "Çok Yakında! 🚀",
             "reset_data": "HER ŞEYİ SIFIRLA"
           },
@@ -225,6 +230,11 @@ i18n
             "theme_pink": "Pink",
             "language_title": "Language",
             "cloud_title": "Cloud Sync",
+            "cloud_connect": "Connect with Google Drive",
+            "cloud_connected": "Google Account Connected",
+            "cloud_disconnect": "Disconnect",
+            "sync_now": "Sync Now",
+            "login_error": "Failed to login. Please try again.",
             "coming_soon": "Coming Soon! 🚀",
             "reset_data": "RESET ALL DATA"
           },

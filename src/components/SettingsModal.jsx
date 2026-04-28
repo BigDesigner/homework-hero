@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, User, Globe, Cloud, Trash2, Palette, Sparkles, Heart, ChevronRight, AlertTriangle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { storage } from '../utils/storage'
+import { googleAuthService } from '../utils/googleAuthService'
+import { LogIn, LogOut, RefreshCw } from 'lucide-react'
 
 const AVATARS = [
   { id: 1, emoji: '🦊' }, { id: 2, emoji: '🐼' }, { id: 3, emoji: '🦁' },
@@ -11,12 +13,15 @@ const AVATARS = [
   { id: 10, emoji: '👾' }, { id: 11, emoji: '🦸' }, { id: 12, emoji: '🧙' },
 ]
 
-export default function SettingsModal({ isOpen, onClose, user, onUpdateUser }) {
+export default function SettingsModal({ isOpen, onClose, user, onUpdateUser, onSync }) {
   const { t, i18n } = useTranslation()
   const [nickname, setNickname] = useState(user?.nickname || '')
   const [selectedAvatar, setSelectedAvatar] = useState(user?.avatarId || 1)
   const [selectedTheme, setSelectedTheme] = useState(user?.theme || 'blue')
   const [confirmReset, setConfirmReset] = useState(false)
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const [isSyncing, setIsSyncing] = useState(false)
+  const [loginErrorMsg, setLoginErrorMsg] = useState('')
 
   useEffect(() => {
     if (confirmReset) {
@@ -43,6 +48,34 @@ export default function SettingsModal({ isOpen, onClose, user, onUpdateUser }) {
     // Final Confirmation - Perform Reset
     console.log('Resetting all data...')
     storage.clearAll()
+  }
+
+  const handleGoogleLogin = async () => {
+    setIsLoggingIn(true)
+    setLoginErrorMsg('')
+    const result = await googleAuthService.signIn()
+    if (result.success) {
+      onUpdateUser({ ...user, googleUser: result.user })
+    } else {
+      setLoginErrorMsg(result.error || 'Google login failed')
+    }
+    setIsLoggingIn(false)
+  }
+
+  const handleGoogleLogout = async () => {
+    const result = await googleAuthService.signOut()
+    if (result.success) {
+      const newUser = { ...user }
+      delete newUser.googleUser
+      onUpdateUser(newUser)
+    }
+  }
+
+  const handleManualSync = async () => {
+    if (!onSync) return;
+    setIsSyncing(true);
+    await onSync();
+    setIsSyncing(false);
   }
 
   return (
@@ -140,13 +173,51 @@ export default function SettingsModal({ isOpen, onClose, user, onUpdateUser }) {
               </section>
 
               {/* Backup Section */}
-              <section className="space-y-4 opacity-60">
+              <section className="space-y-4">
                 <label className="text-slate-400 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
                   <Cloud size={14} /> {t('settings.cloud_title')}
                 </label>
-                <div className="bg-slate-50 p-5 rounded-2xl border-4 border-dashed border-slate-100 text-center">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t('settings.coming_soon')}</p>
-                </div>
+                
+                {user.googleUser ? (
+                  <div className="bg-emerald-50 p-5 rounded-[2rem] border-4 border-emerald-100 flex flex-col items-center gap-4">
+                    <div className="flex items-center gap-3 w-full">
+                      <img src={user.googleUser.imageUrl} alt="Google" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+                      <div className="flex-1 text-left">
+                        <p className="text-xs font-black text-slate-700">{user.googleUser.name}</p>
+                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{t('settings.cloud_connected')}</p>
+                      </div>
+                      <button onClick={handleGoogleLogout} className="text-slate-300 hover:text-red-400 p-2">
+                        <LogOut size={18} />
+                      </button>
+                    </div>
+                    <button 
+                      className="w-full bg-white text-emerald-600 border-2 border-emerald-100 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-emerald-100 transition-colors disabled:opacity-50"
+                      onClick={handleManualSync}
+                      disabled={isSyncing}
+                    >
+                      <RefreshCw size={14} className={isSyncing ? "animate-spin" : ""} />
+                      {isSyncing ? t('settings.sync_now') + '...' : t('settings.sync_now')}
+                    </button>
+                  </div>
+                ) : (
+                  <button 
+                    onClick={handleGoogleLogin}
+                    disabled={isLoggingIn}
+                    className="w-full bg-white border-4 border-slate-50 p-5 rounded-[2rem] flex items-center gap-4 hover:border-primary/20 transition-all group"
+                  >
+                    <div className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                      {isLoggingIn ? <RefreshCw size={20} className="animate-spin text-primary" /> : <LogIn size={20} className="text-slate-400 group-hover:text-primary" />}
+                    </div>
+                    <div className="text-left">
+                      <p className="text-xs font-black text-slate-700">{t('settings.cloud_connect')}</p>
+                    </div>
+                  </button>
+                )}
+                {loginErrorMsg && (
+                  <p className="text-xs text-red-500 font-bold mt-2 break-words bg-red-50 p-3 rounded-xl border-2 border-red-100">
+                    ❌ Hata: {loginErrorMsg}
+                  </p>
+                )}
               </section>
 
               {/* Danger Zone */}

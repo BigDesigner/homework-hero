@@ -1,5 +1,11 @@
 {
   "appId": "com.homeworkhero.app",
   "appName": "Homework Hero",
-  "webDir": "dist"
+  "webDir": "dist",
+  "plugins": {
+    "GoogleSignIn": {
+      "clientId": "1072553767565-8s7ipjb84k5jsrhd2k982qti61pva8oi.apps.googleusercontent.com",
+      "scopes": ["profile", "email", "https://www.googleapis.com/auth/drive.appdata"]
+    }
+  }
 }

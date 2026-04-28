@@ -99,6 +99,10 @@
     "theme_pink": "Pink",
     "language_title": "Language",
     "cloud_title": "Cloud Sync",
+    "cloud_connect": "Connect with Google Drive",
+    "cloud_connected": "Google Account Connected",
+    "cloud_disconnect": "Disconnect",
+    "sync_now": "Sync Now",
     "coming_soon": "Coming Soon! 🚀",
     "reset_data": "RESET ALL DATA"
   },
