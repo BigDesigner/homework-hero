@@ -1,0 +1,108 @@
+{
+  "app_name": "Ödev Kahramanı",
+  "welcome": "Hoş Geldin Kahraman!",
+  "nickname": "Kahraman Adın",
+  "choose_avatar": "Avatarını Seç",
+  "lets_go": "Maceraya Başla! 🚀",
+  "nav": {
+    "tasks": "Görevler",
+    "calendar": "Takvim",
+    "badges": "Kupalar",
+    "settings": "Ayarlar",
+    "archive": "Biten Görevler",
+    "streak_days": "{{count}} Gün"
+  },
+  "onboarding": {
+    "welcome": "Hoş Geldin Kahraman!",
+    "sub": "Görevlerini takip et, kupaları topla ve seviye atla!",
+    "nickname": "Kahraman Adın",
+    "choose_avatar": "Avatarını Seç",
+    "start": "Maceraya Başla! 🚀"
+  },
+  "dashboard": {
+    "level": "Seviye {{level}} Çaylak",
+    "power_bar": "Günlük Güç",
+    "tasks_completed": "GÖREV TAMAMLANDI",
+    "quick_badges": "Kupa Odası",
+    "streak": "Seri",
+    "new_task": "Yeni Görev",
+    "active_tasks": "Aktif Görevler 🚀",
+    "completed_tasks": "Biten Görevler 🏆",
+    "completed_label": "Tamamlandı!",
+    "no_active": "Henüz aktif bir görev yok!",
+    "no_completed": "Henüz biten bir görev yok!",
+    "add_sub": "Yeni bir görev ekleyerek gücünü artırabilirsin.",
+    "completed_sub": "Görevlerini tamamladıkça burası kupalarla dolacak!"
+  },
+  "status": {
+    "completed": "Harika bir iş çıkardın! ✨",
+    "overdue": "Eyvah, süresi geçmiş! ⏰",
+    "today": "Son gün! Bugün bitirmelisin! 🔥",
+    "tomorrow": "Sadece 1 günün kaldı! ⏳",
+    "days_left": "{{count}} günün var, yapabilirsin! 💪",
+    "plenty_time": "{{count}} gün kaldı, vaktin var! ✨"
+  },
+  "badges_data": {
+    "starter_name": "Başlangıç",
+    "starter_sub": "Bitirilen Görevler",
+    "math_name": "Sayı Ustası",
+    "math_sub": "Matematik Görevi",
+    "turkish_name": "Kitap Kurdu",
+    "turkish_sub": "Türkçe Görevi",
+    "science_name": "Kaşif",
+    "science_sub": "Fen Görevi",
+    "art_name": "Küçük Sanatçı",
+    "art_sub": "Sanat Görevi",
+    "sport_name": "Şampiyon Sporcu",
+    "sport_sub": "Beden Eğitimi",
+    "fast_name": "Hızlı Işık",
+    "fast_sub": "Eklendiği gün biten",
+    "early_name": "Erken Kalkan",
+    "early_sub": "Sabah bitirilenler",
+    "night_name": "Gece Savaşçısı",
+    "night_sub": "Akşam bitirilenler",
+    "weekend_name": "Hafta Sonu Hero",
+    "weekend_sub": "Cmt/Pazar çalışan",
+    "warrior_name": "Görev Savaşçısı",
+    "warrior_sub": "10 Görev Barajı",
+    "clean_name": "Tertemiz",
+    "clean_sub": "Tüm görevler bitti",
+    "footer_tip": "Her görev seni daha büyük bir şampiyon yapar! 🏆⚡"
+  },
+  "subjects": {
+    "mat": "Matematik",
+    "tur": "Türkçe",
+    "sci": "Fen Bilimleri",
+    "soc": "Sosyal Bilgiler",
+    "eng": "İngilizce",
+    "art": "Görsel Sanatlar",
+    "mus": "Müzik",
+    "pe": "Beden Eğitimi",
+    "rel": "Din Kültürü",
+    "other": "Diğer"
+  },
+  "modal": {
+    "edit_title": "Görevi Düzenle",
+    "new_title": "Yeni Görev",
+    "what_to_do": "Ne yapacaksın?",
+    "which_subject": "Hangi Ders?",
+    "due_date": "Ne Zaman Bitiyor?",
+    "save": "Değişiklikleri Kaydet ✨",
+    "create": "Görevi Oluştur! 🚀",
+    "title_placeholder": "Örn: Matematik sayfa 42",
+    "error_title": "Başlık en az 3 karakter olmalı!",
+    "error_date": "Lütfen bir tarih seç!"
+  },
+  "settings": {
+    "theme_title": "Tema",
+    "theme_blue": "Mavi",
+    "theme_pink": "Pembe",
+    "language_title": "Dil Seçimi",
+    "cloud_title": "Bulut Senkronizasyonu",
+    "coming_soon": "Çok Yakında! 🚀",
+    "reset_data": "HER ŞEYİ SIFIRLA"
+  },
+  "common": {
+    "confirm_delete": "Bu işlemi yapmak istediğine emin misin? Bu işlem geri alınamaz! 🗑️"
+  }
+}

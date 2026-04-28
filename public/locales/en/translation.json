@@ -1,0 +1,108 @@
+{
+  "app_name": "Homework Hero",
+  "welcome": "Welcome Hero!",
+  "nickname": "Hero Nickname",
+  "choose_avatar": "Choose Your Avatar",
+  "lets_go": "Start Adventure! 🚀",
+  "nav": {
+    "tasks": "Tasks",
+    "calendar": "Calendar",
+    "badges": "Trophies",
+    "settings": "Settings",
+    "archive": "Finished Tasks",
+    "streak_days": "{{count}} Days"
+  },
+  "onboarding": {
+    "welcome": "Welcome Hero!",
+    "sub": "Track your tasks, collect trophies and level up!",
+    "nickname": "Hero Name",
+    "choose_avatar": "Choose Your Avatar",
+    "start": "Start Adventure! 🚀"
+  },
+  "dashboard": {
+    "level": "Level {{level}} Rookie",
+    "power_bar": "Daily Power",
+    "tasks_completed": "TASKS COMPLETED",
+    "quick_badges": "Trophy Room",
+    "streak": "Streak",
+    "new_task": "New Task",
+    "active_tasks": "Active Tasks 🚀",
+    "completed_tasks": "Finished Tasks 🏆",
+    "completed_label": "Finished!",
+    "no_active": "No active tasks yet!",
+    "no_completed": "No finished tasks yet!",
+    "add_sub": "Add a new task to increase your power.",
+    "completed_sub": "Complete tasks to fill this room with trophies!"
+  },
+  "status": {
+    "completed": "Great job! You did it! ✨",
+    "overdue": "Oops, it's overdue! ⏰",
+    "today": "Last day! Finish it today! 🔥",
+    "tomorrow": "Only 1 day left! ⏳",
+    "days_left": "{{count}} days left, you can do it! 💪",
+    "plenty_time": "{{count}} days left, plenty of time! ✨"
+  },
+  "badges_data": {
+    "starter_name": "Getting Started",
+    "starter_sub": "Finished Tasks",
+    "math_name": "Number Master",
+    "math_sub": "Math Task",
+    "turkish_name": "Bookworm",
+    "turkish_sub": "English Task",
+    "science_name": "Explorer",
+    "science_sub": "Science Task",
+    "art_name": "Little Artist",
+    "art_sub": "Art Task",
+    "sport_name": "Champion Athlete",
+    "sport_sub": "Physical Ed.",
+    "fast_name": "Fast Light",
+    "fast_sub": "Finished on same day",
+    "early_name": "Early Bird",
+    "early_sub": "Finished in morning",
+    "night_name": "Night Warrior",
+    "night_sub": "Finished at night",
+    "weekend_name": "Weekend Hero",
+    "weekend_sub": "Working on Sat/Sun",
+    "warrior_name": "Task Warrior",
+    "warrior_sub": "10 Task Milestone",
+    "clean_name": "Squeaky Clean",
+    "clean_sub": "All tasks finished",
+    "footer_tip": "Every task makes you a bigger champion! 🏆⚡"
+  },
+  "subjects": {
+    "mat": "Mathematics",
+    "tur": "English",
+    "sci": "Science",
+    "soc": "Social Studies",
+    "eng": "English Language",
+    "art": "Visual Arts",
+    "mus": "Music",
+    "pe": "Physical Education",
+    "rel": "Religion",
+    "other": "Other"
+  },
+  "modal": {
+    "edit_title": "Edit Task",
+    "new_title": "New Task",
+    "what_to_do": "What to do?",
+    "which_subject": "Which Subject?",
+    "due_date": "When is it due?",
+    "save": "Save Changes ✨",
+    "create": "Create Task! 🚀",
+    "title_placeholder": "e.g. Math page 42",
+    "error_title": "Title must be at least 3 characters!",
+    "error_date": "Please select a date!"
+  },
+  "settings": {
+    "theme_title": "Theme",
+    "theme_blue": "Blue",
+    "theme_pink": "Pink",
+    "language_title": "Language",
+    "cloud_title": "Cloud Sync",
+    "coming_soon": "Coming Soon! 🚀",
+    "reset_data": "RESET ALL DATA"
+  },
+  "common": {
+    "confirm_delete": "Are you sure you want to do this? This cannot be undone! 🗑️"
+  }
+}
