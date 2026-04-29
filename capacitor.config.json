@@ -5,7 +5,19 @@
   "plugins": {
     "GoogleSignIn": {
       "clientId": "1072553767565-8s7ipjb84k5jsrhd2k982qti61pva8oi.apps.googleusercontent.com",
+      "serverClientId": "1072553767565-8s7ipjb84k5jsrhd2k982qti61pva8oi.apps.googleusercontent.com",
       "scopes": ["profile", "email", "https://www.googleapis.com/auth/drive.appdata"]
+    },
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#4facfe",
+      "showSpinner": false,
+      "androidScaleType": "CENTER_CROP"
+    },
+    "Keyboard": {
+      "resize": "body",
+      "style": "LIGHT",
+      "resizeOnFullScreen": true
     }
   }
 }

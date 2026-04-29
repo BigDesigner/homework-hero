@@ -68,7 +68,7 @@ export default function AddMissionModal({ isOpen, onClose, onAdd, editingMission
             initial={{ scale: 0.9, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 50 }}
-            className="relative bg-white w-full max-w-xl rounded-[3rem] shadow-2xl overflow-hidden flex flex-col max-h-[95vh] sm:max-h-[90vh]"
+            className="relative bg-white w-full max-w-xl rounded-t-[3rem] sm:rounded-[3rem] shadow-2xl overflow-hidden flex flex-col max-h-full sm:max-h-[90vh] mt-auto sm:mt-0"
           >
             <div className="bg-primary p-6 sm:p-8 text-white flex items-center justify-between flex-shrink-0">
               <h3 className="text-2xl sm:text-3xl font-black tracking-tight">

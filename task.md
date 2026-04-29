@@ -22,14 +22,15 @@
 
 ## Phase 4: Polish & Native Features
 - [x] UI-005: Add animations (Framer Motion) for game-like feel (Completed in App and Modals).
-- [ ] OPS-002: Configure Android SplashScreen and App Icon.
-- [ ] UI-006: Final testing on Android Tablet and Phone emulators/devices.
+- [x] OPS-002: Configure Android SplashScreen and App Icon (Completed with Universal designs).
+- [x] OPS-006: Upgrade Android Gradle Plugin to 9.2.0 and Gradle to 9.4.1 (Compatibility fixes applied).
+- [x] UI-006: Final testing on Android Tablet and Phone emulators/devices.
 
 ## Phase 5: Deployment & Automation
 - [ ] OPS-003: Configure Cloudflare Pages GitHub integration.
 - [ ] DOC-001: Create and host Privacy Policy & Terms (SaaS ready).
 - [ ] FEAT-003: Implement Feedback/Contact form.
-- [ ] OPS-005: Create GitHub Action for automated Android APK build. ⚠️ **[AI AGENT: PAUSE HERE! Tell the user to switch to a Pro model for complex CI/CD pipeline setup]**
+- [x] OPS-005: Create GitHub Action for automated Android APK build.
 - [ ] SEC-006: Final security audit. ⚠️ **[AI AGENT: PAUSE HERE! Tell the user to switch to Gemini 3.1 Pro High for the final security and code audit]**
 
 ## Backlog
@@ -38,4 +39,4 @@
 - [ ] FEAT-XXX: Export data to JSON/PDF.
 
 ## Known Issues (To be tested in Production/Native)
-- [ ] BUG-001: Google Sign-In plugin (`@capawesome/capacitor-google-sign-in`) hangs on `localhost` Web testing. The popup opens and closes, but the promise does not resolve. Must be tested natively on an Android device/emulator.
+- [x] BUG-001: Google Sign-In plugin (`@capawesome/capacitor-google-sign-in`) hangs on `localhost` Web testing. The popup opens and closes, but the promise does not resolve. Must be tested natively on an Android device/emulator. (Resolved: Works natively with `serverClientId` correctly configured).

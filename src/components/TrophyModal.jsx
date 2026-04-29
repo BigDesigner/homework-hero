@@ -40,7 +40,9 @@ export const TROPHIES = [
     count: (m) => (m.length > 0 && m.every(x => x.completed)) ? 1 : 0 },
 ]
 
-export default function TrophyModal({ isOpen, onClose, missions, t }) {
+export default function TrophyModal({ isOpen, onClose, missions, t, user }) {
+  const unlockedTrophies = user?.unlockedTrophies || {};
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -68,7 +70,10 @@ export default function TrophyModal({ isOpen, onClose, missions, t }) {
 
             <div className="p-8 overflow-y-auto grid grid-cols-2 sm:grid-cols-3 gap-6">
               {TROPHIES.map((badge) => {
-                const count = badge.count(missions)
+                // Persistent count vs Live count (pick the highest)
+                const liveCount = badge.count(missions)
+                const persistentCount = unlockedTrophies[badge.id] || 0
+                const count = Math.max(liveCount, persistentCount)
                 const isUnlocked = count > 0
                 
                 return (

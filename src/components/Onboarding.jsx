@@ -30,8 +30,8 @@ export default function Onboarding({ onComplete }) {
   const accentColor = theme === 'pink' ? '#f472b6' : '#5da9e9'
 
   return (
-    <div className="fixed inset-0 bg-white z-[100] flex flex-col items-center justify-center p-6 overflow-y-auto">
-      <div className="w-full max-w-md py-12">
+    <div className="fixed inset-0 bg-white z-[100] flex flex-col items-center overflow-y-auto px-6" style={{ paddingTop: 'var(--safe-area-top)', paddingBottom: 'var(--safe-area-bottom)' }}>
+      <div className="w-full max-w-md py-8">
         <div className="text-center mb-12">
           <div className="w-24 h-24 bg-slate-50 rounded-[2.5rem] flex items-center justify-center text-5xl mx-auto mb-6 shadow-xl border-4 border-white">
             {selectedAvatar ? AVATARS.find(a => a.id === selectedAvatar).emoji : '👋'}

@@ -22,6 +22,7 @@ export default function SettingsModal({ isOpen, onClose, user, onUpdateUser, onS
   const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [isSyncing, setIsSyncing] = useState(false)
   const [loginErrorMsg, setLoginErrorMsg] = useState('')
+  const [imgError, setImgError] = useState(false)
 
   useEffect(() => {
     if (confirmReset) {
@@ -53,6 +54,7 @@ export default function SettingsModal({ isOpen, onClose, user, onUpdateUser, onS
   const handleGoogleLogin = async () => {
     setIsLoggingIn(true)
     setLoginErrorMsg('')
+    setImgError(false)
     const result = await googleAuthService.signIn()
     if (result.success) {
       onUpdateUser({ ...user, googleUser: result.user })
@@ -181,7 +183,18 @@ export default function SettingsModal({ isOpen, onClose, user, onUpdateUser, onS
                 {user.googleUser ? (
                   <div className="bg-emerald-50 p-5 rounded-[2rem] border-4 border-emerald-100 flex flex-col items-center gap-4">
                     <div className="flex items-center gap-3 w-full">
-                      <img src={user.googleUser.imageUrl} alt="Google" className="w-10 h-10 rounded-full border-2 border-white shadow-sm" />
+                      {user.googleUser.imageUrl && !imgError ? (
+                        <img 
+                          src={user.googleUser.imageUrl} 
+                          alt="Google" 
+                          className="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" 
+                          onError={() => setImgError(true)}
+                        />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-emerald-100 border-2 border-white shadow-sm flex items-center justify-center text-emerald-500">
+                          <User size={20} />
+                        </div>
+                      )}
                       <div className="flex-1 text-left">
                         <p className="text-xs font-black text-slate-700">{user.googleUser.name}</p>
                         <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{t('settings.cloud_connected')}</p>
@@ -198,6 +211,19 @@ export default function SettingsModal({ isOpen, onClose, user, onUpdateUser, onS
                       <RefreshCw size={14} className={isSyncing ? "animate-spin" : ""} />
                       {isSyncing ? t('settings.sync_now') + '...' : t('settings.sync_now')}
                     </button>
+                    
+                    {user.lastSync && (
+                      <div className="flex flex-col items-center gap-1">
+                        <p className="text-[9px] font-black text-emerald-400 uppercase tracking-widest">
+                          {t('settings.last_sync')}: {user.lastSync}
+                        </p>
+                        {user.syncError && (
+                          <p className="text-[9px] font-black text-red-400 uppercase tracking-widest animate-pulse">
+                            ⚠️ {user.syncError}
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <button 

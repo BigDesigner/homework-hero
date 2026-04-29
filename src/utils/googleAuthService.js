@@ -7,6 +7,7 @@ export const googleAuthService = {
   async initialize() {
     await GoogleSignIn.initialize({
       clientId: '1072553767565-8s7ipjb84k5jsrhd2k982qti61pva8oi.apps.googleusercontent.com',
+      serverClientId: '1072553767565-8s7ipjb84k5jsrhd2k982qti61pva8oi.apps.googleusercontent.com',
       scopes: ['profile', 'email', 'https://www.googleapis.com/auth/drive.appdata'],
       redirectUrl: window.location.origin
     });
@@ -27,8 +28,9 @@ export const googleAuthService = {
         email: result?.user?.email || result?.email,
         name: result?.user?.name || result?.name || result?.displayName || 'Kahraman',
         imageUrl: result?.user?.imageUrl || result?.imageUrl,
-        idToken: auth.idToken,
-        accessToken: auth.accessToken
+        idToken: auth.idToken || result?.idToken,
+        accessToken: auth.accessToken || result?.accessToken,
+        serverAuthCode: result?.serverAuthCode
       };
 
       return {

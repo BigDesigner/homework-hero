@@ -12,6 +12,7 @@ import CalendarModal from './components/CalendarModal'
 import { notificationService } from './utils/notificationService'
 import { soundService } from './utils/soundService'
 import { driveService } from './utils/googleDriveService'
+import { Toast } from '@capacitor/toast'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -91,33 +92,86 @@ function App() {
   }
 
   const handleSync = async () => {
-    if (!user?.googleUser?.accessToken) return false;
+    if (!user?.googleUser?.accessToken) {
+      const keys = user?.googleUser ? Object.keys(user.googleUser).join(', ') : 'yok';
+      const hasAuthCode = user?.googleUser?.serverAuthCode ? "VAR" : "YOK";
+      await Toast.show({ 
+        text: `Hata: accessToken eksik. Veriler: ${keys} | serverAuthCode: ${hasAuthCode}`, 
+        duration: 'long' 
+      });
+      return false;
+    }
     
     const localData = {
       user: {
         nickname: user.nickname,
         avatarId: user.avatarId,
-        theme: user.theme
+        theme: user.theme,
+        unlockedTrophies: user.unlockedTrophies || {}
       },
       missions: missions
     };
     
     const result = await driveService.syncData(localData, user.googleUser.accessToken);
+    
+    const syncTime = new Date().toLocaleTimeString(i18n.language === 'tr' ? 'tr-TR' : 'en-US', { hour: '2-digit', minute: '2-digit' });
+    
     if (result.success && result.data) {
       setMissions(result.data.missions);
-      if (result.data.user) {
-        const newUser = { ...user, ...result.data.user };
-        storage.setUser(newUser);
-        setUser(newUser);
+      
+      setUser(prev => {
+        const newUser = { 
+          ...prev, 
+          ...(result.data.user || {}),
+          lastSync: syncTime,
+          syncError: null
+        };
+        setTimeout(() => storage.setUser(newUser), 0);
         if (newUser.theme) applyTheme(newUser.theme);
-      }
-      soundService.playTada(); // Play sound on successful sync
+        return newUser; 
+      });
+      
+      soundService.playTada();
+      await Toast.show({ text: t('settings.sync_success'), duration: 'short' });
       return true;
     } else {
-      console.error("Sync failed:", result.error);
+      const errorMsg = result.error || t('settings.sync_failed');
+      setUser(prev => {
+        const newUser = { ...prev, syncError: errorMsg, lastSync: syncTime };
+        setTimeout(() => storage.setUser(newUser), 0);
+        return newUser;
+      });
+      await Toast.show({ text: "Hata: " + errorMsg, duration: 'long' });
       return false;
     }
   }
+
+  // Persistent Trophy Logic - Robust implementation with deferred storage
+  useEffect(() => {
+    if (!loading) {
+      setUser(prev => {
+        if (!prev) return prev;
+        
+        const currentUnlocked = { ...(prev.unlockedTrophies || {}) };
+        let hasNewChange = false;
+        
+        TROPHIES.forEach(trophy => {
+          const count = trophy.count(missions);
+          if (count > (currentUnlocked[trophy.id] || 0)) {
+            currentUnlocked[trophy.id] = count;
+            hasNewChange = true;
+          }
+        });
+        
+        if (hasNewChange) {
+          const updatedUser = { ...prev, unlockedTrophies: currentUnlocked };
+          setTimeout(() => storage.setUser(updatedUser), 0);
+          return updatedUser;
+        }
+        return prev;
+      });
+    }
+  }, [missions, loading]);
 
   const addMission = (newMission) => {
     if (newMission.id) {
@@ -238,7 +292,7 @@ function App() {
       </nav>
 
       {/* Mobile Header (Simplified) */}
-      <header className="sm:hidden bg-white border-b-4 border-slate-100 px-6 py-4 flex items-center justify-center sticky top-0 z-40">
+      <header className="sm:hidden bg-white border-b-4 border-slate-100 px-6 py-4 flex items-center justify-center sticky top-0 z-40" style={{ paddingTop: 'calc(var(--safe-area-top) + 1rem)' }}>
         <div className="flex items-center gap-2">
           <Zap size={20} className="text-primary" strokeWidth={3} />
           <h1 className="text-lg font-black text-slate-800 tracking-tight italic">{t('app_name')}</h1>
@@ -364,8 +418,8 @@ function App() {
       </footer>
 
       <AddMissionModal isOpen={isAddModalOpen} onClose={() => { setIsAddModalOpen(false); setEditingMission(null); }} onAdd={addMission} editingMission={editingMission} missions={missions} />
-      <TrophyModal isOpen={isTrophiesOpen} onClose={() => setIsTrophiesOpen(false)} missions={missions} t={t} />
-      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} user={user} onUpdateUser={updateUserInfo} onSync={handleSync} />
+      <TrophyModal isOpen={isTrophiesOpen} onClose={() => setIsTrophiesOpen(false)} missions={missions} t={t} user={user} />
+      <SettingsModal key={user?.lastSync || 'initial'} isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} user={user} onUpdateUser={updateUserInfo} onSync={handleSync} />
       <CalendarModal isOpen={isCalendarOpen} onClose={() => setIsCalendarOpen(false)} missions={missions} />
     </div>
   )

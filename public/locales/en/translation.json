@@ -3,7 +3,7 @@
   "welcome": "Welcome Hero!",
   "nickname": "Hero Nickname",
   "choose_avatar": "Choose Your Avatar",
-  "lets_go": "Start Adventure! 🚀",
+  "lets_go": "Start Adventure!",
   "nav": {
     "tasks": "Tasks",
     "calendar": "Calendar",
@@ -17,7 +17,7 @@
     "sub": "Track your tasks, collect trophies and level up!",
     "nickname": "Hero Name",
     "choose_avatar": "Choose Your Avatar",
-    "start": "Start Adventure! 🚀"
+    "start": "Start Adventure!"
   },
   "dashboard": {
     "level": "Level {{level}} Rookie",
@@ -26,8 +26,8 @@
     "quick_badges": "Trophy Room",
     "streak": "Streak",
     "new_task": "New Task",
-    "active_tasks": "Active Tasks 🚀",
-    "completed_tasks": "Finished Tasks 🏆",
+    "active_tasks": "Active Tasks",
+    "completed_tasks": "Finished Tasks",
     "completed_label": "Finished!",
     "no_active": "No active tasks yet!",
     "no_completed": "No finished tasks yet!",
@@ -39,8 +39,8 @@
     "overdue": "Oops, it's overdue! ⏰",
     "today": "Last day! Finish it today! 🔥",
     "tomorrow": "Only 1 day left! ⏳",
-    "days_left": "{{count}} days left, you can do it! 💪",
-    "plenty_time": "{{count}} days left, plenty of time! ✨"
+    "days_left": "{{count}} days left, you can do it!",
+    "plenty_time": "{{count}} days left, plenty of time!"
   },
   "badges_data": {
     "starter_name": "Getting Started",
@@ -67,7 +67,7 @@
     "warrior_sub": "10 Task Milestone",
     "clean_name": "Squeaky Clean",
     "clean_sub": "All tasks finished",
-    "footer_tip": "Every task makes you a bigger champion! 🏆⚡"
+    "footer_tip": "Every task makes you a bigger champion!"
   },
   "subjects": {
     "mat": "Mathematics",
@@ -87,8 +87,8 @@
     "what_to_do": "What to do?",
     "which_subject": "Which Subject?",
     "due_date": "When is it due?",
-    "save": "Save Changes ✨",
-    "create": "Create Task! 🚀",
+    "save": "Save Changes",
+    "create": "Create Task!",
     "title_placeholder": "e.g. Math page 42",
     "error_title": "Title must be at least 3 characters!",
     "error_date": "Please select a date!"
@@ -103,10 +103,10 @@
     "cloud_connected": "Google Account Connected",
     "cloud_disconnect": "Disconnect",
     "sync_now": "Sync Now",
-    "coming_soon": "Coming Soon! 🚀",
+    "coming_soon": "Coming Soon!",
     "reset_data": "RESET ALL DATA"
   },
   "common": {
-    "confirm_delete": "Are you sure you want to do this? This cannot be undone! 🗑️"
+    "confirm_delete": "Are you sure you want to do this? This cannot be undone!"
   }
 }

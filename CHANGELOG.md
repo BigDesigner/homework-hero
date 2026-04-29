@@ -10,6 +10,10 @@ All notable changes to this project will be documented in this file.
 - **Manual Sync Button**: Added a "Sync Now" button with loading animation and success sound feedback.
 - **New Translation Keys**: Added `cloud_connect`, `cloud_connected`, `sync_now`, and `login_error` to both Turkish and English resources in `i18n.js`.
 
+- **Android Assets (OPS-002)**: Generated universal (text-free) app icon and splash screen using `@capacitor/assets`.
+- **Android Localization**: Added Turkish (`values-tr`) string resources to support localized app name "Ödev Kahramanı".
+- **SplashScreen Config**: Configured `capacitor.config.json` with duration and background color for a smoother startup experience.
+
 ### Fixed
 - **Google Auth Web Support**: Added explicit `initialize` call with `redirectUrl` to support development in browser environments.
 - **Failsafe Data Extraction**: Updated `googleAuthService` to handle variations in Google API response structures across different versions of the Capacitor plugin.

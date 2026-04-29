@@ -17,8 +17,22 @@
 }
 
 @layer base {
+  :root {
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  html, body {
+    @apply h-full w-full overflow-x-hidden;
+    background-color: var(--color-surface);
+  }
+
+  input, select, textarea {
+    font-size: 16px !important; /* Prevents iOS auto-zoom */
+  }
+
   body {
-    @apply font-lexend bg-white text-slate-800 antialiased;
+    @apply font-lexend text-slate-800 antialiased min-h-screen;
   }
 }
 
