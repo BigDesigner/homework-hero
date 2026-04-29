@@ -7,6 +7,9 @@ on:
     branches: [ "main", "master" ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,8 +45,14 @@ jobs:
     - name: Build Android APK (Debug)
       run: cd android && ./gradlew assembleDebug
 
-    - name: Upload APK Artifact
-      uses: actions/upload-artifact@v4
+    - name: Release APK
+      uses: ncipollo/release-action@v1
       with:
-        name: homework-hero-app-debug
-        path: android/app/build/outputs/apk/debug/app-debug.apk
+        artifacts: "android/app/build/outputs/apk/debug/app-debug.apk"
+        tag: "latest"
+        name: "En Güncel Sürüm (Geliştirici)"
+        body: "Bu APK otomatik olarak derlenmiştir. Dosyayı indirip doğrudan Android cihazınıza kurabilirsiniz."
+        allowUpdates: true
+        replacesArtifacts: true
+        makeLatest: "true"
+        token: ${{ secrets.GITHUB_TOKEN }}
